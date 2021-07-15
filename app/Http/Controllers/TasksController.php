@@ -30,7 +30,19 @@ class TasksController extends Controller
             'task' => $task,
         ]);
     }
+    
+     // postでmessages/にアクセスされた場合の「新規登録処理」
+   public function store(Request $request)
+    {
+        // メッセージを作成
+        $task = new Task;
+        $task->content = $request->content;
+        $task->save();
 
+        // トップページへリダイレクトさせる
+        return redirect('/');
+    }
+    
     // getでmessages/（任意のid）にアクセスされた場合の「取得表示処理」
     public function show($id)
     {
@@ -53,5 +65,30 @@ class TasksController extends Controller
         return view('tasks.edit', [
             'task' => $task,
         ]);
+    }
+
+ // putまたはpatchでmessages/（任意のid）にアクセスされた場合の「更新処理」
+     public function update(Request $request, $id)
+    {
+        // idの値でメッセージを検索して取得
+        $task = Task::findOrFail($id);
+        // メッセージを更新
+        $task->content = $request->content;
+        $task->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
+    }
+
+    // deleteでmessages/（任意のid）にアクセスされた場合の「削除処理」
+    public function destroy($id)
+    {
+        // idの値でメッセージを検索して取得
+        $task = Task::findOrFail($id);
+        // メッセージを削除
+        $task->delete();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 }
