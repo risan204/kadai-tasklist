@@ -15,7 +15,7 @@
             {{-- エラーメッセージ --}}
             @include('commons.error_messages')
 
-            @yield('content','status')
+            @yield('content')
         </div>
 
         <!-- JavaScriptの定義は省略 -->
