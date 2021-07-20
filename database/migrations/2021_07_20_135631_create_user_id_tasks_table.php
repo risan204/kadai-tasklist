@@ -13,24 +13,15 @@ class CreateUserIdTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('content');
-            $table->timestamps();
-
-            // 外部キー制約
-            $table->foreign('user_id')->references('id')->on('users');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->string('title');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('title');
+        });
     }
 }

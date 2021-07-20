@@ -35,17 +35,19 @@ class TasksController extends Controller
    public function store(Request $request)
     {
         // バリデーション
-        $request->validate([
+         $request->validate([
+            'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
         ]);
 
-        // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
-        $request->user()->tasks()->create([
-            'content' => $request->content,
-        ]);
+        // メッセージを作成
+        $task = new Task;
+        $task->title = $request->title;    // 追加
+        $task->content = $request->content;
+        $task->save();
 
-        // 前のURLへリダイレクトさせる
-        return back();
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
     
     // getでtasks/（任意のid）にアクセスされた場合の「取得表示処理」
@@ -73,18 +75,18 @@ class TasksController extends Controller
     }
 
  // putまたはpatchでtasks/（任意のid）にアクセスされた場合の「更新処理」
-     public function update(Request $request, $id)
+      public function update(Request $request, $id)
     {
         // バリデーション
         $request->validate([
-            'status' => 'required|max:10',
+            'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
         ]);
-        
-        // idの値でタスクを検索して取得
+
+        // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
-        // タスクを更新
-        $task->status = $request->status;
+        // メッセージを更新
+        $task->title = $request->title;    // 追加
         $task->content = $request->content;
         $task->save();
 
