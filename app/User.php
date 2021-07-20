@@ -42,7 +42,7 @@ class User extends Authenticatable
      */
     public function tasklist()
     {
-        return $this->hasMany(Micropost::class);
+        return $this->hasMany(Task::class);
     }
     
     /**
@@ -50,6 +50,6 @@ class User extends Authenticatable
      */
     public function loadRelationshipCounts()
     {
-        $this->loadCount('microposts');
+        $this->loadCount('task');
     }
 }
