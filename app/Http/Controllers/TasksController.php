@@ -41,9 +41,9 @@ class TasksController extends Controller
         ]);
         
         // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
-        $request->user()->task()->create([
-            'status' => $request->status,
-            'content' => $request->content,
+       $request->user()->tasklist()->create([
+       'status' => $request->status,
+       'content' => $request->content,
         ]);
 
         // トップページへリダイレクトさせる
