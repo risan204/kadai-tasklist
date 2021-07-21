@@ -1,6 +1,6 @@
 @if (count($tasks) > 0)
     <ul class="list-unstyled">
-        @foreach ($tasks as $micropost)
+        @foreach ($tasks as $task)
             <li class="media mb-3">
                 {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
                 <img class="mr-2 rounded" src="{{ Gravatar::get($task->user->email, ['size' => 50]) }}" alt="">
@@ -27,5 +27,5 @@
         @endforeach
     </ul>
     {{-- ページネーションのリンク --}}
-    {{ $microposts->links() }}
+    {{ $task->links() }}
 @endif
