@@ -11,8 +11,7 @@ class Task extends Model
     /**
      * この投稿を所有するユーザ。（ Userモデルとの関係を定義）
      */
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
+    public function user(){
+        return $this->blongsTo(User::class);
     }
 }
